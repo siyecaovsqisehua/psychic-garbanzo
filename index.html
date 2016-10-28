@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜</title>
+	<script src="jquery-1.11.1/jquery.min.js"></script>
+	<style>
+		*{margin:0;padding:0;}
+		#min{width:384px;margin:30px 400px;}
+		#max{width:300px;height:300px;position: absolute;overflow: hidden;display: none;}
+	</style>
+
+</head>
+<body>
+	<img src="images/bingbing.jpg" alt="" id="min">
+	<div id="max">
+		<img src="images/bingbing.jpg" alt="">
+	</div>
+	<script>
+		//鼠标移入小图
+		$('#min').mouseover(function(){
+			// var p=$(this).position();
+			var p=$(this).offset();
+			var w=$(this).width();
+			$('#max').css({top:p.top,left:p.left+w+5}).show();
+			//鼠标移出小图
+		}).mouseout(function(){
+			$('#max').hide();
+			//鼠标移动中
+		}).mousemove(function(e){
+			// console.dir(e); //用于查看事件对象的内容
+			//e.pageY*5 这里的5 是原图和小图的比例
+			//设置大图的滚动 其实就是设置滚动条
+			$('#max').scrollTop(e.offsetY*5-150).scrollLeft(e.offsetX*5-150);
+		});
+	</script>
+</body>
+</html>
